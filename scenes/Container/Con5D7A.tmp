@@ -1,0 +1,72 @@
+[gd_scene load_steps=9 format=3 uid="uid://bb6tdxq63r020"]
+
+[ext_resource type="Script" path="res://scenes/Container/Container.gd" id="1_by6qi"]
+[ext_resource type="Texture2D" uid="uid://bbd8b6v1lswmx" path="res://assets/Container.png" id="1_era5l"]
+[ext_resource type="PackedScene" uid="uid://cl5vdhvyx1cce" path="res://scenes/Number/Number.tscn" id="3_iwm4d"]
+[ext_resource type="Script" path="res://scenes/ConveyorBelt/Connection/out_put_connection.gd" id="3_ombwr"]
+[ext_resource type="Script" path="res://scenes/ConveyorBelt/Connection/in_put_connection.gd" id="4_47t55"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_kh4ej"]
+size = Vector2(14, 14)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_6dr13"]
+size = Vector2(90, 80)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_bv77c"]
+size = Vector2(88, 80)
+
+[node name="Container" type="CharacterBody2D"]
+collision_layer = 2
+collision_mask = 6
+script = ExtResource("1_by6qi")
+
+[node name="NinePatchRect" type="NinePatchRect" parent="."]
+offset_right = 16.0
+offset_bottom = 16.0
+scale = Vector2(5, 5)
+size_flags_horizontal = 4
+size_flags_vertical = 4
+texture = ExtResource("1_era5l")
+patch_margin_left = 3
+patch_margin_top = 3
+patch_margin_right = 3
+patch_margin_bottom = 3
+axis_stretch_horizontal = 2
+axis_stretch_vertical = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(50, 40)
+scale = Vector2(5, 5)
+shape = SubResource("RectangleShape2D_kh4ej")
+
+[node name="OutPutConnection" type="Area2D" parent="."]
+position = Vector2(40, 40)
+collision_layer = 16
+collision_mask = 0
+script = ExtResource("3_ombwr")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="OutPutConnection"]
+shape = SubResource("RectangleShape2D_6dr13")
+
+[node name="InputConnection" type="Area2D" parent="."]
+position = Vector2(40, 40)
+collision_layer = 8
+collision_mask = 0
+script = ExtResource("4_47t55")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="InputConnection"]
+shape = SubResource("RectangleShape2D_bv77c")
+debug_color = Color(0.963138, 1.34766e-06, 0.500482, 0.42)
+
+[node name="Number2" parent="." instance=ExtResource("3_iwm4d")]
+visible = false
+position = Vector2(40, 40)
+scale = Vector2(1, 1)
+
+[node name="Number3" parent="." instance=ExtResource("3_iwm4d")]
+visible = false
+position = Vector2(90, 40)
+scale = Vector2(1, 1)
+
+[connection signal="number_requested" from="OutPutConnection" to="." method="_send_numbers"]
+[connection signal="numbers_received" from="InputConnection" to="." method="_on_input_connection_numbers_received"]

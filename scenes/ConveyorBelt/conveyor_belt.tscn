@@ -1,0 +1,67 @@
+[gd_scene load_steps=9 format=3 uid="uid://ouk21fw24rdm"]
+
+[ext_resource type="Script" path="res://scenes/ConveyorBelt/conveyor_belt.gd" id="2_vo8ll"]
+[ext_resource type="Script" path="res://scenes/ConveyorBelt/belt_path2d.gd" id="2_yaclj"]
+[ext_resource type="Texture2D" uid="uid://clvdom7ptnwk8" path="res://assets/Conveyour.png" id="3_xwc0t"]
+[ext_resource type="Script" path="res://scenes/ConveyorBelt/belt_line2d.gd" id="3_yu2kh"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_uotbb"]
+
+[sub_resource type="Shader" id="Shader_p2drg"]
+code = "shader_type canvas_item;
+
+uniform float speed = 1.0;
+uniform vec4 default_color : source_color = vec4(1,1,1,1);
+
+void fragment() {
+	vec2 new_UV = mod(UV - vec2(TIME * speed,0), 1);
+	COLOR = texture(TEXTURE, new_UV) * default_color;
+	
+}"
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_1lwcj"]
+shader = SubResource("Shader_p2drg")
+shader_parameter/speed = 0.0
+shader_parameter/default_color = Color(1, 1, 1, 1)
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_a0hc1"]
+radius = 24.0
+
+[node name="ConveyorBelt" type="Node2D"]
+script = ExtResource("2_vo8ll")
+single_item = true
+
+[node name="StartArea2D" type="Area2D" parent="."]
+collision_layer = 32
+collision_mask = 16
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StartArea2D"]
+shape = SubResource("CircleShape2D_uotbb")
+
+[node name="Path2D" type="Path2D" parent="."]
+script = ExtResource("2_yaclj")
+
+[node name="Line2D" type="Line2D" parent="."]
+show_behind_parent = true
+material = SubResource("ShaderMaterial_1lwcj")
+width = 48.0
+texture = ExtResource("3_xwc0t")
+texture_mode = 1
+joint_mode = 2
+antialiased = true
+script = ExtResource("3_yu2kh")
+
+[node name="EndArea2D" type="Area2D" parent="Line2D"]
+collision_layer = 0
+collision_mask = 10
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Line2D/EndArea2D"]
+shape = SubResource("CircleShape2D_a0hc1")
+
+[node name="AutoActivateTimer" type="Timer" parent="."]
+one_shot = true
+
+[connection signal="activate" from="Line2D" to="." method="_on_line_2d_left_clicked"]
+[connection signal="clicked" from="Line2D" to="Line2D" method="_on_clicked"]
+[connection signal="delete" from="Line2D" to="." method="_on_line_2d_delete"]
+[connection signal="released" from="Line2D" to="Line2D" method="_on_released"]

@@ -1,0 +1,33 @@
+[gd_scene load_steps=9 format=3 uid="uid://k0286pysmil0"]
+
+[ext_resource type="PackedScene" uid="uid://b362hutkxlj4v" path="res://scenes/Level/level.tscn" id="1_y8t3o"]
+[ext_resource type="Script" path="res://resources/level_info.gd" id="2_fp7vp"]
+[ext_resource type="PackedScene" uid="uid://cepvtr4clwc8h" path="res://scenes/Level/MainConveyor/main_conveyor.tscn" id="2_icqwj"]
+[ext_resource type="Script" path="res://resources/level_test.gd" id="3_cgqxt"]
+[ext_resource type="PackedScene" uid="uid://ftq2u124iehm" path="res://scenes/Level/Deposit/deposit.tscn" id="3_lffjg"]
+
+[sub_resource type="Resource" id="Resource_6eou4"]
+script = ExtResource("2_fp7vp")
+prompt = "Mande os numeros para o deposito"
+tips = Array[String]([])
+available_objects = Array[int]([2, 1])
+
+[sub_resource type="Resource" id="Resource_nw70o"]
+script = ExtResource("3_cgqxt")
+inputs = Array[int]([2, 4])
+results = Array[int]([2, 4])
+
+[sub_resource type="Resource" id="Resource_ksdke"]
+script = ExtResource("3_cgqxt")
+inputs = Array[int]([1, 2])
+results = Array[int]([1, 2])
+
+[node name="Level1" instance=ExtResource("1_y8t3o")]
+level_info = SubResource("Resource_6eou4")
+level_tests = Array[ExtResource("3_cgqxt")]([SubResource("Resource_nw70o"), SubResource("Resource_ksdke")])
+
+[node name="Deposit" parent="." index="2" instance=ExtResource("3_lffjg")]
+position = Vector2(1033, 328)
+
+[node name="MainConveyor" parent="." index="3" instance=ExtResource("2_icqwj")]
+position = Vector2(60, 345)

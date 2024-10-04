@@ -1,0 +1,47 @@
+[gd_scene load_steps=6 format=3 uid="uid://cl5vdhvyx1cce"]
+
+[ext_resource type="Script" path="res://scenes/Number/number.gd" id="1_lcmfj"]
+[ext_resource type="Texture2D" uid="uid://7gsbbu0hamb" path="res://assets/NUmber.png" id="2_2734y"]
+[ext_resource type="FontFile" uid="uid://bygp8r16f484q" path="res://assets/fonts/tinypixel/tinypixel.otf" id="3_3wd7n"]
+
+[sub_resource type="Theme" id="Theme_0ibbm"]
+default_font = ExtResource("3_3wd7n")
+default_font_size = 32
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_gm4va"]
+radius = 14.0
+
+[node name="Number" type="Node2D"]
+script = ExtResource("1_lcmfj")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+scale = Vector2(5, 5)
+texture = ExtResource("2_2734y")
+
+[node name="Label" type="Label" parent="."]
+offset_left = -20.0
+offset_top = -18.0
+offset_right = 20.0
+offset_bottom = 20.0
+theme = SubResource("Theme_0ibbm")
+theme_type_variation = &"GraphFrameTitleLabel"
+theme_override_colors/font_color = Color(1, 1, 0, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 0)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 0)
+theme_override_constants/line_spacing = 0
+theme_override_constants/shadow_offset_x = 0
+theme_override_constants/shadow_offset_y = 0
+theme_override_constants/shadow_outline_size = 10
+text = "1"
+horizontal_alignment = 1
+vertical_alignment = 3
+
+[node name="FindInputArea" type="Area2D" parent="."]
+collision_layer = 0
+collision_mask = 8
+monitorable = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="FindInputArea"]
+shape = SubResource("CircleShape2D_gm4va")
+
+[connection signal="area_entered" from="FindInputArea" to="." method="_on_find_input_area_area_entered"]

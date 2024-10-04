@@ -1,0 +1,33 @@
+[gd_scene load_steps=5 format=3 uid="uid://ftq2u124iehm"]
+
+[ext_resource type="Texture2D" uid="uid://drje3qms5516h" path="res://assets/MainConveyor.png" id="1_3mjpx"]
+[ext_resource type="Script" path="res://scenes/Level/Deposit/deposit.gd" id="1_gd3ln"]
+[ext_resource type="Script" path="res://scenes/ConveyorBelt/Connection/in_put_connection.gd" id="2_cllkx"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_jrlj0"]
+size = Vector2(318, 69)
+
+[node name="Deposit" type="Node2D"]
+script = ExtResource("1_gd3ln")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+modulate = Color(0.699042, 0.683071, 1, 1)
+scale = Vector2(-11, 11)
+texture = ExtResource("1_3mjpx")
+
+[node name="InputConnection" type="Area2D" parent="."]
+position = Vector2(-155, 65)
+collision_layer = 8
+collision_mask = 0
+script = ExtResource("2_cllkx")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="InputConnection"]
+position = Vector2(149, -11.5)
+shape = SubResource("RectangleShape2D_jrlj0")
+
+[node name="Marker2D" type="Marker2D" parent="."]
+position = Vector2(-154, 58)
+
+[node name="Node2D" type="Node2D" parent="Marker2D"]
+
+[connection signal="numbers_received" from="InputConnection" to="." method="_on_input_connection_numbers_received"]

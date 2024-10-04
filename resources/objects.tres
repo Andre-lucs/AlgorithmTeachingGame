@@ -1,0 +1,32 @@
+[gd_resource type="Resource" script_class="ObjectsList" load_steps=12 format=3 uid="uid://d1ch86aipymit"]
+
+[ext_resource type="Script" path="res://resources/item_list_item.gd" id="1_frwfv"]
+[ext_resource type="Texture2D" uid="uid://7gsbbu0hamb" path="res://assets/NUmber.png" id="2_7gayg"]
+[ext_resource type="PackedScene" uid="uid://cl5vdhvyx1cce" path="res://scenes/Number/number.tscn" id="3_i1iy3"]
+[ext_resource type="Texture2D" uid="uid://bbd8b6v1lswmx" path="res://assets/Container.png" id="4_ao6ve"]
+[ext_resource type="PackedScene" uid="uid://bb6tdxq63r020" path="res://scenes/Container/container.tscn" id="5_6ln1u"]
+[ext_resource type="Texture2D" uid="uid://clvdom7ptnwk8" path="res://assets/Conveyour.png" id="6_2b781"]
+[ext_resource type="PackedScene" uid="uid://ouk21fw24rdm" path="res://scenes/ConveyorBelt/conveyor_belt.tscn" id="7_0ji7x"]
+[ext_resource type="Script" path="res://resources/ObjectsList.gd" id="8_waqgl"]
+
+[sub_resource type="Resource" id="Resource_qvtr0"]
+script = ExtResource("1_frwfv")
+item_scene = ExtResource("3_i1iy3")
+item_text = "Numero"
+item_icon = ExtResource("2_7gayg")
+
+[sub_resource type="Resource" id="Resource_2ok4y"]
+script = ExtResource("1_frwfv")
+item_scene = ExtResource("5_6ln1u")
+item_text = "Container"
+item_icon = ExtResource("4_ao6ve")
+
+[sub_resource type="Resource" id="Resource_r4ny3"]
+script = ExtResource("1_frwfv")
+item_scene = ExtResource("7_0ji7x")
+item_text = "Esteira"
+item_icon = ExtResource("6_2b781")
+
+[resource]
+script = ExtResource("8_waqgl")
+Objects = Array[ExtResource("1_frwfv")]([SubResource("Resource_qvtr0"), SubResource("Resource_2ok4y"), SubResource("Resource_r4ny3")])

@@ -1,0 +1,16 @@
+[gd_scene load_steps=4 format=3 uid="uid://b362hutkxlj4v"]
+
+[ext_resource type="Script" path="res://scenes/Level/level.gd" id="1_k27br"]
+[ext_resource type="PackedScene" uid="uid://bxktnqjl3ectp" path="res://UI/ui_root.tscn" id="1_sgpbx"]
+[ext_resource type="PackedScene" uid="uid://cuyrmwr2mflcb" path="res://scenes/Solution/solution.tscn" id="2_s2soc"]
+
+[node name="Level" type="Node2D"]
+script = ExtResource("1_k27br")
+
+[node name="UI" type="CanvasLayer" parent="."]
+
+[node name="UIRoot" parent="UI" instance=ExtResource("1_sgpbx")]
+
+[node name="Solution" parent="." instance=ExtResource("2_s2soc")]
+
+[connection signal="create_object" from="UI/UIRoot" to="." method="_on_ui_root_create_object"]
