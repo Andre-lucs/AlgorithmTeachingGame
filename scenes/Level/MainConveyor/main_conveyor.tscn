@@ -1,8 +1,9 @@
-[gd_scene load_steps=5 format=3 uid="uid://cepvtr4clwc8h"]
+[gd_scene load_steps=6 format=3 uid="uid://cepvtr4clwc8h"]
 
 [ext_resource type="Texture2D" uid="uid://drje3qms5516h" path="res://assets/MainConveyor.png" id="1_j4pht"]
 [ext_resource type="Script" path="res://scenes/Level/MainConveyor/main_conveyor.gd" id="1_n1esy"]
 [ext_resource type="Script" path="res://scenes/ConveyorBelt/Connection/out_put_connection.gd" id="2_rsxkx"]
+[ext_resource type="Script" path="res://scenes/ConveyorBelt/Connection/connections.gd" id="3_wvjy1"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_vqpdb"]
 size = Vector2(293, 53)
@@ -14,18 +15,21 @@ script = ExtResource("1_n1esy")
 scale = Vector2(10, 11.418)
 texture = ExtResource("1_j4pht")
 
-[node name="OutPutConnection" type="Area2D" parent="."]
+[node name="NumbersOrigin" type="Marker2D" parent="."]
+position = Vector2(125, 51)
+gizmo_extents = 5.1
+
+[node name="Connections" type="Node2D" parent="."]
+script = ExtResource("3_wvjy1")
+
+[node name="OutPutConnection" type="Area2D" parent="Connections"]
 position = Vector2(142, 66)
 collision_layer = 16
 collision_mask = 0
 script = ExtResource("2_rsxkx")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="OutPutConnection"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Connections/OutPutConnection"]
 position = Vector2(-134, -2.5)
 shape = SubResource("RectangleShape2D_vqpdb")
 
-[node name="NumbersOrigin" type="Marker2D" parent="."]
-position = Vector2(125, 51)
-gizmo_extents = 5.1
-
-[connection signal="number_requested" from="OutPutConnection" to="." method="_on_out_put_connection_number_requested"]
+[connection signal="number_requested" from="Connections/OutPutConnection" to="." method="_on_out_put_connection_number_requested"]

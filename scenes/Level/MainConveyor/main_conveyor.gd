@@ -2,7 +2,7 @@ class_name MainConveyor extends Node2D
 
 const NUMBER = preload("res://scenes/Number/Number.tscn")
 @onready var numbers_origin: Marker2D = $NumbersOrigin
-@onready var out_put_connection: OutPutConnection = $OutPutConnection
+@onready var out_put_connection: OutPutConnection = $Connections/OutPutConnection
 
 var numbers :Array[int] = []:
 	set(value):
