@@ -58,10 +58,11 @@ collision_mask = 10
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Line2D/EndArea2D"]
 shape = SubResource("CircleShape2D_a0hc1")
 
-[node name="AutoActivateTimer" type="Timer" parent="."]
+[node name="ActivationDelay" type="Timer" parent="."]
 one_shot = true
 
 [connection signal="activate" from="Line2D" to="." method="_on_line_2d_left_clicked"]
 [connection signal="clicked" from="Line2D" to="Line2D" method="_on_clicked"]
 [connection signal="delete" from="Line2D" to="." method="_on_line_2d_delete"]
 [connection signal="released" from="Line2D" to="Line2D" method="_on_released"]
+[connection signal="timeout" from="ActivationDelay" to="." method="_on_activation_delay_timeout"]
