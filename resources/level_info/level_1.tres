@@ -1,0 +1,9 @@
+[gd_resource type="Resource" script_class="LevelInfo" load_steps=2 format=3 uid="uid://bshnv1vp07svs"]
+
+[ext_resource type="Script" path="res://resources/level_info.gd" id="1_evjul"]
+
+[resource]
+script = ExtResource("1_evjul")
+prompt = "Mande os numeros para o deposito"
+tips = Array[String]([])
+available_objects = Array[int]([2, 1])

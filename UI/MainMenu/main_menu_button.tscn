@@ -1,0 +1,66 @@
+[gd_scene load_steps=6 format=3 uid="uid://ds5kjkss1hk1d"]
+
+[ext_resource type="Texture2D" uid="uid://cbo4acr6ekpxf" path="res://assets/Spritesheet_UI_Flat.png" id="1_c3550"]
+[ext_resource type="FontFile" uid="uid://bygp8r16f484q" path="res://assets/fonts/tinypixel/tinypixel.otf" id="2_c5sc4"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_knvvh"]
+atlas = ExtResource("1_c3550")
+region = Rect2(32, 32, 96, 56)
+
+[sub_resource type="GDScript" id="GDScript_bh4jc"]
+script/source = "@tool
+extends TextureButton
+
+@export var button_text : String : 
+	set(v):
+		$Label.text = v;
+		button_text = v;
+
+var og_size
+var og_pos
+const grow_amount = 10
+
+func _on_mouse_entered() -> void:
+	og_size = size
+	og_pos = position
+	create_tween().tween_property(self, \"size\", size + Vector2(0, grow_amount), .2)
+	create_tween().tween_property(self, \"position\", position - Vector2(0, grow_amount), .2)
+
+
+func _on_mouse_exited() -> void:
+	create_tween().tween_property(self, \"size\", og_size, .2)
+	create_tween().tween_property(self, \"position\", og_pos, .2)
+"
+
+[sub_resource type="LabelSettings" id="LabelSettings_rohjx"]
+font = ExtResource("2_c5sc4")
+font_size = 21
+font_color = Color(0, 0, 0, 1)
+
+[node name="TextureButton" type="TextureButton"]
+clip_contents = true
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_top = -56.0
+offset_right = 96.0
+grow_vertical = 0
+size_flags_vertical = 8
+texture_normal = SubResource("AtlasTexture_knvvh")
+stretch_mode = 0
+script = SubResource("GDScript_bh4jc")
+
+[node name="Label" type="Label" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "Jogar"
+label_settings = SubResource("LabelSettings_rohjx")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[connection signal="mouse_entered" from="." to="." method="_on_mouse_entered"]
+[connection signal="mouse_exited" from="." to="." method="_on_mouse_exited"]

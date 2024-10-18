@@ -1,0 +1,26 @@
+[gd_scene load_steps=3 format=3 uid="uid://cvkm0xxbhvai5"]
+
+[ext_resource type="Script" path="res://UI/LevelSelect/level_select_button.gd" id="1_xbwx8"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_wcq3m"]
+corner_radius_top_left = 20
+corner_radius_top_right = 20
+corner_radius_bottom_right = 20
+corner_radius_bottom_left = 40
+
+[node name="LevelSelectUiButton" type="Button"]
+custom_minimum_size = Vector2(100, 100)
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_hover_color = Color(0.581033, 0.581033, 0.581033, 1)
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 32
+theme_override_styles/normal = SubResource("StyleBoxFlat_wcq3m")
+text = "1"
+script = ExtResource("1_xbwx8")
+level_number = 1
+
+[connection signal="pressed" from="." to="." method="_on_pressed"]

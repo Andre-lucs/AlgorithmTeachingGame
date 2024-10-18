@@ -1,0 +1,68 @@
+[gd_scene load_steps=5 format=3 uid="uid://wwvr14fn7dxk"]
+
+[ext_resource type="FontFile" uid="uid://bygp8r16f484q" path="res://assets/fonts/tinypixel/tinypixel.otf" id="1_1avm3"]
+[ext_resource type="Script" path="res://UI/MainMenu/main_menu.gd" id="1_rq1od"]
+[ext_resource type="PackedScene" uid="uid://ds5kjkss1hk1d" path="res://UI/MainMenu/main_menu_button.tscn" id="2_tbkde"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_q6rlf"]
+font = ExtResource("1_1avm3")
+font_size = 100
+
+[node name="MainMenuLayer" type="CanvasLayer"]
+
+[node name="MainMenu" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_rq1od")
+
+[node name="MarginContainer" type="MarginContainer" parent="MainMenu"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 30
+theme_override_constants/margin_top = 50
+theme_override_constants/margin_right = 50
+
+[node name="HSplitContainer" type="VSplitContainer" parent="MainMenu/MarginContainer"]
+layout_mode = 2
+split_offset = 2895
+
+[node name="Label" type="Label" parent="MainMenu/MarginContainer/HSplitContainer"]
+layout_mode = 2
+size_flags_horizontal = 8
+size_flags_vertical = 0
+text = "AlgoGame"
+label_settings = SubResource("LabelSettings_q6rlf")
+
+[node name="Control" type="HBoxContainer" parent="MainMenu/MarginContainer/HSplitContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_constants/separation = -20
+
+[node name="PlayBtn" parent="MainMenu/MarginContainer/HSplitContainer/Control" instance=ExtResource("2_tbkde")]
+z_index = 2
+custom_minimum_size = Vector2(300, 150)
+layout_mode = 2
+size_flags_horizontal = 0
+
+[node name="ConfigBtn" parent="MainMenu/MarginContainer/HSplitContainer/Control" instance=ExtResource("2_tbkde")]
+z_index = 1
+custom_minimum_size = Vector2(280, 130)
+layout_mode = 2
+button_text = "Configurações"
+
+[node name="ExitBtn" parent="MainMenu/MarginContainer/HSplitContainer/Control" instance=ExtResource("2_tbkde")]
+custom_minimum_size = Vector2(260, 110)
+layout_mode = 2
+button_text = "Sair"
+
+[connection signal="pressed" from="MainMenu/MarginContainer/HSplitContainer/Control/PlayBtn" to="MainMenu" method="_on_play_btn_pressed"]
+[connection signal="pressed" from="MainMenu/MarginContainer/HSplitContainer/Control/ExitBtn" to="MainMenu" method="_on_exit_btn_pressed"]

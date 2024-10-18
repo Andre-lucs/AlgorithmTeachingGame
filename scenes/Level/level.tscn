@@ -1,8 +1,10 @@
-[gd_scene load_steps=4 format=3 uid="uid://b362hutkxlj4v"]
+[gd_scene load_steps=6 format=3 uid="uid://b362hutkxlj4v"]
 
 [ext_resource type="Script" path="res://scenes/Level/level.gd" id="1_k27br"]
-[ext_resource type="PackedScene" uid="uid://bxktnqjl3ectp" path="res://UI/ui_root.tscn" id="1_sgpbx"]
+[ext_resource type="PackedScene" uid="uid://bxktnqjl3ectp" path="res://UI/Level/ui_root.tscn" id="1_sgpbx"]
 [ext_resource type="PackedScene" uid="uid://cuyrmwr2mflcb" path="res://scenes/Solution/solution.tscn" id="2_s2soc"]
+[ext_resource type="PackedScene" uid="uid://ftq2u124iehm" path="res://scenes/Level/Deposit/deposit.tscn" id="4_7avmc"]
+[ext_resource type="PackedScene" uid="uid://cepvtr4clwc8h" path="res://scenes/Level/MainConveyor/main_conveyor.tscn" id="5_5quyk"]
 
 [node name="Level" type="Node2D"]
 script = ExtResource("1_k27br")
@@ -12,5 +14,11 @@ script = ExtResource("1_k27br")
 [node name="UIRoot" parent="UI" instance=ExtResource("1_sgpbx")]
 
 [node name="Solution" parent="." instance=ExtResource("2_s2soc")]
+
+[node name="Deposit" parent="." instance=ExtResource("4_7avmc")]
+position = Vector2(1033, 328)
+
+[node name="MainConveyor" parent="." instance=ExtResource("5_5quyk")]
+position = Vector2(60, 345)
 
 [connection signal="create_object" from="UI/UIRoot" to="." method="_on_ui_root_create_object"]
