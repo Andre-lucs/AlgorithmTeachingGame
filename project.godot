@@ -11,17 +11,26 @@ config_version=5
 [application]
 
 config/name="AlgorithmTeachingGame"
-run/main_scene="res://scenes/Level/level.tscn"
+run/main_scene="res://UI/MainMenu/main_menu.tscn"
 config/features=PackedStringArray("4.3", "Forward Plus")
 config/icon="res://icon.svg"
 
+[autoload]
+
+LevelSceneManager="*res://utils/level_scene_manager.gd"
+
 [display]
 
+window/subwindows/embed_subwindows=false
 window/stretch/mode="canvas_items"
 
 [dotnet]
 
 project/assembly_name="NewAlgoGame"
+
+[gui]
+
+theme/custom_font="res://assets/fonts/tinypixel/tinypixel.otf"
 
 [input]
 
