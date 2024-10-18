@@ -20,17 +20,12 @@ var items : Array[Number] = [];
 var lastClickPos := Vector2.ZERO
 var created := false
 var creating := false
-var can_activate : bool = true
-var active := false:
-	set(value):
-		active = value
-		var speed = 1 if value else 0
-		if not value: deactivated.emit()
-		(($Line2D as Line2D).material as ShaderMaterial).set_shader_parameter("speed", speed)
+var waiting_delay : bool = false
+var active := false
 
-func _ready() -> void:
-	active = true
-	pass
+func _turn_animation(on:bool):
+	var speed = 1 if on else 0
+	(($Line2D as Line2D).material as ShaderMaterial).set_shader_parameter("speed", speed)
 
 func _process(_delta):
 	if not created:
@@ -106,7 +101,7 @@ func _execute():
 			_moveItems(delta);
 
 func activate() :
-	if not can_activate:
+	if waiting_delay:
 		await activation_delay.timeout
 	if single_item and items.size(): 
 		if automatic:
@@ -115,17 +110,28 @@ func activate() :
 	
 	if input:
 		input.request_numbers()
+	
+
+func _finish_activation():
 	active = true
-	can_activate = false
+	_turn_animation(true)
+	waiting_delay = true
 	activation_delay.start()
 	if automatic:
 		call_deferred("activate")
+
+func deactivate():
+	active = false
+	_turn_animation(false)
+	deactivated.emit()
 
 func _on_numbers_received(numbers : Array[Number]):
 	for i in numbers:
 		path_2d.add_path_follow_node(i);
 		if !items.has(i):
-			items.append(i);	
+			items.append(i);
+	if not items.is_empty():
+		_finish_activation()
 
 func _moveItems(delta):
 	for i in items:
@@ -142,8 +148,7 @@ func _finishMove(node:PathFollow2D):
 	node.queue_free()
 	items.erase(item)
 	if items.is_empty():
-		active = false
-
+		deactivate()
 
 func _on_line_2d_delete():
 	queue_free()
@@ -153,4 +158,4 @@ func _on_line_2d_left_clicked() -> void:
 		activate()
 
 func _on_activation_delay_timeout() -> void:
-	can_activate = true
+	waiting_delay = false
