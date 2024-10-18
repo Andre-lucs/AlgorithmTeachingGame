@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="ObjectsList" load_steps=12 format=3 uid="uid://d1ch86aipymit"]
+[gd_resource type="Resource" script_class="ObjectsList" load_steps=13 format=3 uid="uid://d1ch86aipymit"]
 
 [ext_resource type="Script" path="res://resources/item_list_item.gd" id="1_frwfv"]
 [ext_resource type="Texture2D" uid="uid://7gsbbu0hamb" path="res://assets/NUmber.png" id="2_7gayg"]
@@ -27,6 +27,10 @@ item_scene = ExtResource("7_0ji7x")
 item_text = "Esteira"
 item_icon = ExtResource("6_2b781")
 
+[sub_resource type="Resource" id="Resource_8pkns"]
+script = ExtResource("1_frwfv")
+item_text = "Operacao"
+
 [resource]
 script = ExtResource("8_waqgl")
-Objects = Array[ExtResource("1_frwfv")]([SubResource("Resource_qvtr0"), SubResource("Resource_2ok4y"), SubResource("Resource_r4ny3")])
+Objects = Array[ExtResource("1_frwfv")]([SubResource("Resource_qvtr0"), SubResource("Resource_2ok4y"), SubResource("Resource_r4ny3"), SubResource("Resource_8pkns")])

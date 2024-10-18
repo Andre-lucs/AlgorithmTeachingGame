@@ -1,7 +1,7 @@
 [gd_scene load_steps=8 format=3 uid="uid://snex0e7po7fw"]
 
 [ext_resource type="FontFile" uid="uid://bygp8r16f484q" path="res://assets/fonts/tinypixel/tinypixel.otf" id="1_5x77y"]
-[ext_resource type="Script" path="res://UI/item_list.gd" id="5_kfnh6"]
+[ext_resource type="Script" path="res://UI/Level/item_list.gd" id="5_kfnh6"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_x7j1k"]
 

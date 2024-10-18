@@ -1,8 +1,10 @@
-[gd_scene load_steps=4 format=3 uid="uid://bxktnqjl3ectp"]
+[gd_scene load_steps=6 format=3 uid="uid://bxktnqjl3ectp"]
 
-[ext_resource type="PackedScene" uid="uid://snex0e7po7fw" path="res://UI/objects_list.tscn" id="1_pgjhy"]
-[ext_resource type="Script" path="res://UI/ui_root.gd" id="1_wnjn1"]
+[ext_resource type="PackedScene" uid="uid://snex0e7po7fw" path="res://UI/Level/objects_list.tscn" id="1_pgjhy"]
+[ext_resource type="Script" path="res://UI/Level/ui_root.gd" id="1_wnjn1"]
 [ext_resource type="Resource" uid="uid://d1ch86aipymit" path="res://resources/objects.tres" id="2_p741r"]
+[ext_resource type="PackedScene" uid="uid://min5voomqxi6" path="res://UI/Level/PopUp/EndLevelPopUp.tscn" id="4_xymni"]
+[ext_resource type="PackedScene" uid="uid://lrtmlf51dcrh" path="res://UI/Level/bottom_items.tscn" id="5_3pnxj"]
 
 [node name="UIRoot" type="Control"]
 layout_mode = 3
@@ -32,4 +34,15 @@ theme_override_constants/margin_bottom = 20
 custom_minimum_size = Vector2(100, 0)
 layout_mode = 2
 
+[node name="EndLevelPopUp" parent="." instance=ExtResource("4_xymni")]
+
+[node name="BottomItems" parent="." instance=ExtResource("5_3pnxj")]
+level_text = "Mande os numeros"
+
+[node name="LevelText" parent="BottomItems/BottomItems/Control/HBoxContainer" index="1"]
+text = "Mande os numeros"
+
 [connection signal="can_place_conveyour" from="MarginContainer/ObjectsList" to="." method="__can_place_conveyour"]
+[connection signal="pressed" from="BottomItems/BottomItems/Control/HBoxContainer/VBoxContainer/PlayButton" to="." method="_on_play_button_pressed"]
+
+[editable path="BottomItems"]
